@@ -1,0 +1,13 @@
+version: "3"
+services:
+  redis-server:
+    image: "redis:alpine"
+    container_name: "redis-server"
+  node-app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis-server
+    environment:
+      - REDIS_URL=redis://redis-server:6379
